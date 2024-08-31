@@ -8,8 +8,8 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.packet.c2s.common.CustomPayloadC2SPacket;
 
 public class AuthMeBypassCommand extends Command {
-    public AuthMeBypassCommand() {
-        super("paradiseauthmebypass", "Bypasses authme via channel exploit");
+    public AuthMeBypassCommand(MinecraftClient minecraftClient) {
+        super("paradiseauthmebypass", "Bypasses authme via channel exploit", minecraftClient);
     }
 
     @Override
