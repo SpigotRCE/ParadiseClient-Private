@@ -1,6 +1,7 @@
 package io.github.spigotrce.paradiseclientprivate.command;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import io.github.spigotrce.paradiseclientfabric.Helper;
 import io.github.spigotrce.paradiseclientfabric.command.Command;
 import io.github.spigotrce.paradiseclientprivate.packets.AuthMeVelocityPayloadPacket;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
@@ -19,6 +20,7 @@ public class AuthMeBypassCommand extends Command {
                     MinecraftClient.getInstance().getNetworkHandler().sendPacket(new CustomPayloadC2SPacket(
                             new AuthMeVelocityPayloadPacket()
                     ));
+                    Helper.printChatMessage("Payload packet sent!");
                     return Command.SINGLE_SUCCESS;
                 });
     }
