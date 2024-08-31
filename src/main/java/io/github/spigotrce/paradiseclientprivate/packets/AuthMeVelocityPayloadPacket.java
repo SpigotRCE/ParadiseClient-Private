@@ -18,7 +18,7 @@ public record AuthMeVelocityPayloadPacket() implements CustomPayload {
         buf.writeByte(0);
         buf.writeString("LOGIN");
         buf.writeByte(0);
-        buf.writeString(MinecraftClient.getInstance().getGameProfile().getId().toString());
+        buf.writeString(MinecraftClient.getInstance().getGameProfile().getName());
     }
 
     public Id<AuthMeVelocityPayloadPacket> getId() {
