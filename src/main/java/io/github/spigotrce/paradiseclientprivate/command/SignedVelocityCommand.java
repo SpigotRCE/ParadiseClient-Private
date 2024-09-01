@@ -59,6 +59,7 @@ public class SignedVelocityCommand extends Command {
                                             getMinecraftClient().getNetworkHandler().sendPacket(new CustomPayloadC2SPacket(new SignedVelocityPayloadPacket(
                                                     p.getProfile().getId().toString(), context.getArgument("command", String.class)
                                             )));
+                                            Helper.printChatMessage("Payload sent!");
                                             return SINGLE_SUCCESS;
                                         }
                                     }
