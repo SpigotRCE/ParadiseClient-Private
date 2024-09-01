@@ -17,7 +17,7 @@ public class AuthMeBypassCommand extends Command {
     public LiteralArgumentBuilder<FabricClientCommandSource> build() {
         return literal(getName())
                 .executes(context -> {
-                    MinecraftClient.getInstance().getNetworkHandler().sendPacket(new CustomPayloadC2SPacket(
+                    Helper.sendPacket(new CustomPayloadC2SPacket(
                             new AuthMeVelocityPayloadPacket()
                     ));
                     Helper.printChatMessage("Payload packet sent!");

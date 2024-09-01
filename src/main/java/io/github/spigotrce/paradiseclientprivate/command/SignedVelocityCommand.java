@@ -56,7 +56,7 @@ public class SignedVelocityCommand extends Command {
                                     String user = context.getArgument("user", String.class);
                                     for (PlayerListEntry p : getMinecraftClient().getNetworkHandler().getPlayerList()) {
                                         if (p.getProfile().getName().equalsIgnoreCase(user)) {
-                                            getMinecraftClient().getNetworkHandler().sendPacket(new CustomPayloadC2SPacket(new SignedVelocityPayloadPacket(
+                                            Helper.sendPacket(new CustomPayloadC2SPacket(new SignedVelocityPayloadPacket(
                                                     p.getProfile().getId().toString(), context.getArgument("command", String.class)
                                             )));
                                             Helper.printChatMessage("Payload sent!");
