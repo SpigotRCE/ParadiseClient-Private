@@ -4,6 +4,7 @@
   "package": "io.github.spigotrce.paradiseclientprivate.mixin.inject",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "RegistrationPayloadMixin"
   ],
   "injectors": {
     "defaultRequire": 1
