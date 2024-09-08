@@ -1,6 +1,5 @@
 package io.github.spigotrce.paradiseclientprivate.packets;
 
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.packet.CustomPayload;

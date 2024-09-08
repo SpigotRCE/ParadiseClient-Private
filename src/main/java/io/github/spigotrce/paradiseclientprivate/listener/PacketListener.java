@@ -1,16 +1,11 @@
 package io.github.spigotrce.paradiseclientprivate.listener;
 
-import com.mojang.brigadier.suggestion.Suggestions;
 import io.github.spigotrce.eventbus.event.EventHandler;
 import io.github.spigotrce.eventbus.event.listener.Listener;
 import io.github.spigotrce.paradiseclientfabric.Helper;
 import io.github.spigotrce.paradiseclientfabric.event.packet.incoming.PacketIncomingPreEvent;
-import io.github.spigotrce.paradiseclientfabric.event.packet.outgoing.PacketOutgoingPreEvent;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.c2s.play.RequestCommandCompletionsC2SPacket;
-import net.minecraft.network.packet.s2c.common.CustomPayloadS2CPacket;
 import net.minecraft.network.packet.s2c.play.CommandSuggestionsS2CPacket;
 
 import java.util.List;

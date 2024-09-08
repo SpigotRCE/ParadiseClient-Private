@@ -14,8 +14,6 @@ import java.util.List;
 
 @Mixin(RegistrationPayload.class)
 public abstract class RegistrationPayloadMixin {
-    @Shadow public abstract List<Identifier> channels();
-
     @Inject(method = "addId", at = @At(value = "HEAD"), remap = false)
     private static void addId(List<Identifier> ids, StringBuilder sb, CallbackInfo ci) {
         String channel = sb.toString();
@@ -29,7 +27,8 @@ public abstract class RegistrationPayloadMixin {
             if (!channel.isEmpty()) Helper.printChatMessage("§9§lChannel: §a§l" + channel);
 
             switch (channel) {
-                case "signedvelocity:main", "chatsentry:datasync", "authmevelocity:main" -> sendVulnerabilityMessage(channel);
+                case "signedvelocity:main", "chatsentry:datasync", "authmevelocity:main" ->
+                        sendVulnerabilityMessage(channel);
             }
         }).start();
     }
@@ -38,4 +37,7 @@ public abstract class RegistrationPayloadMixin {
     private static void sendVulnerabilityMessage(String channel) {
         Helper.printChatMessage("§4§lKnown vulnerability channel found: §e§l" + channel);
     }
+
+    @Shadow
+    public abstract List<Identifier> channels();
 }
