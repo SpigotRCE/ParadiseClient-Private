@@ -2,10 +2,7 @@ package io.github.spigotrce.paradiseclientprivate;
 
 import io.github.spigotrce.paradiseclientfabric.Constants;
 import io.github.spigotrce.paradiseclientfabric.ParadiseClient_Fabric;
-import io.github.spigotrce.paradiseclientprivate.command.AuthMeBypassCommand;
-import io.github.spigotrce.paradiseclientprivate.command.ChatSentryCommand;
-import io.github.spigotrce.paradiseclientprivate.command.DumpCommand;
-import io.github.spigotrce.paradiseclientprivate.command.SignedVelocityCommand;
+import io.github.spigotrce.paradiseclientprivate.command.*;
 import io.github.spigotrce.paradiseclientprivate.listener.PacketListener;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.MinecraftClient;
@@ -38,5 +35,6 @@ public class Main implements ModInitializer {
         ParadiseClient_Fabric.getCommandManager().register(new SignedVelocityCommand(MinecraftClient.getInstance()));
         ParadiseClient_Fabric.getCommandManager().register(new ChatSentryCommand(MinecraftClient.getInstance()));
         ParadiseClient_Fabric.getCommandManager().register(new DumpCommand(MinecraftClient.getInstance()));
+        ParadiseClient_Fabric.getCommandManager().register(new CloudSyncCommand(MinecraftClient.getInstance()));
     }
 }
