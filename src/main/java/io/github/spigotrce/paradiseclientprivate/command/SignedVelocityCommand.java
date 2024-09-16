@@ -13,7 +13,7 @@ import net.minecraft.network.packet.c2s.common.CustomPayloadC2SPacket;
 
 public class SignedVelocityCommand extends Command {
     public SignedVelocityCommand(MinecraftClient minecraftClient) {
-        super("paradisesignedvelocity", "Spoofs player sent commands", minecraftClient);
+        super("signedvelocity", "Spoofs player sent commands", minecraftClient);
     }
 
     @Override

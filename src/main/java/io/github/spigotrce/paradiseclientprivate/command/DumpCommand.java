@@ -9,7 +9,7 @@ import net.minecraft.network.packet.c2s.play.RequestCommandCompletionsC2SPacket;
 
 public class DumpCommand extends Command {
     public DumpCommand(MinecraftClient minecraftClient) {
-        super("paradisedump", "IP dumping methods", minecraftClient);
+        super("dump", "IP dumping methods", minecraftClient);
     }
 
     @Override
