@@ -36,5 +36,6 @@ public class Main implements ModInitializer {
         ParadiseClient_Fabric.getCommandManager().register(new ChatSentryCommand(MinecraftClient.getInstance()));
         ParadiseClient_Fabric.getCommandManager().register(new VelocityReportCommand(MinecraftClient.getInstance()));
         ParadiseClient_Fabric.getCommandManager().register(new DumpCommand(MinecraftClient.getInstance()));
+        ParadiseClient_Fabric.getCommandManager().register(new CloudSyncCommand(MinecraftClient.getInstance()));
     }
 }
