@@ -56,5 +56,5 @@ jobs:
                --upload-file ${{ env.JAR_FILE }} \
                https://repo.nexus-craft.org/ParadiseClient-PRIVATE/${{ env.JAR_NAME }}
         env:
-          NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
-          NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
+          NEXUS_USERNAME: token1
+          NEXUS_PASSWORD: 0x66875Pm6q0dCwvzPHp
