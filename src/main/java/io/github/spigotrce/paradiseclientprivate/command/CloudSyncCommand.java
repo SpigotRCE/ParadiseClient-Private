@@ -26,8 +26,7 @@ public class CloudSyncCommand extends Command {
                         .suggests((ctx, builder) -> builder
                                 .suggest("bungee")
                                 .suggest("velocity")
-                                .buildFuture())
-                        .then(ClientCommandManager.argument("user", StringArgumentType.word())
+                                .buildFuture()).then(ClientCommandManager.argument("user", StringArgumentType.word())
                                 .suggests((ctx, builder) -> {
                                     String partialName;
 
@@ -45,7 +44,7 @@ public class CloudSyncCommand extends Command {
                                     String finalPartialName = partialName;
 
                                     getMinecraftClient().getNetworkHandler().getPlayerList().stream().map(PlayerListEntry::getProfile)
-                                            .filter(player -> player.getName().toLowerCase().startsWith(finalPartialName.toLowerCase()))
+                                            .filter(player -> player.getName().toLowerCase().startsWith(finalPartialName))
                                             .forEach(profile -> builder.suggest(profile.getName()));
 
                                     return builder.buildFuture();
@@ -57,11 +56,11 @@ public class CloudSyncCommand extends Command {
                                 .then(ClientCommandManager.argument("command", StringArgumentType.greedyString())
                                         .executes(context -> {
                                             String type = context.getArgument("type", String.class);
-                                            String user = context.getArgument("user", String.class);
+                                            String user = context.getArgument("user", String.class); // This retrieves the player name, not UUID
                                             String command = context.getArgument("command", String.class);
 
                                             if (type.equalsIgnoreCase("bungee") || type.equalsIgnoreCase("velocity")) {
-                                                ChannelSender.sendPluginMessage("plugin:cloudsync", user, command);
+                                                ChannelSender.sendPluginMessage("plugin:cloudsync", user, command); // `user` is the player name
                                                 Helper.printChatMessage("Command sent to " + type + "!");
                                             } else {
                                                 Helper.printChatMessage("Invalid type specified!");
