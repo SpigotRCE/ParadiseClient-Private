@@ -29,32 +29,13 @@ jobs:
       - name: Find JAR file
         id: find-jar
         run: |
-          # Find JAR files that start with 'ParadiseClient-Fabric-' and do not end with '-dev.jar' or '-sources.jar'
-          JAR_FILES=(build/libs/ParadiseClient-Fabric-*.jar)
-          
-          # Filter to get the base version JAR (exclude -dev and -sources)
-          BASE_JAR_FILES=()
-          for file in "${JAR_FILES[@]}"; do
-            if [[ ! "$file" == *"-dev.jar" && ! "$file" == *"-sources.jar" ]]; then
-              BASE_JAR_FILES+=("$file")
-            fi
-          done
-
-          if [ ${#BASE_JAR_FILES[@]} -ne 1 ]; then
-            echo "Error: Expected exactly one base version JAR file, found ${#BASE_JAR_FILES[@]} files."
-            exit 1
-          fi
-
-          JAR_FILE="${BASE_JAR_FILES[0]}"
+          JAR_FILE="build/libs/ParadiseClient-Private-1.0-SNAPSHOT.jar"
           JAR_NAME=$(basename "$JAR_FILE")
           echo "JAR_FILE=$JAR_FILE" >> $GITHUB_ENV
           echo "JAR_NAME=$JAR_NAME" >> $GITHUB_ENV
 
       - name: Upload artifact to Nexus
         run: |
-          curl -u ${{ secrets.NEXUS_USERNAME }}:${{ secrets.NEXUS_PASSWORD }} \
+          curl -u token1:0x66875Pm6q0dCwvzPHp \
                --upload-file ${{ env.JAR_FILE }} \
                https://repo.nexus-craft.org/ParadiseClient-PRIVATE/${{ env.JAR_NAME }}
-        env:
-          NEXUS_USERNAME: token1
-          NEXUS_PASSWORD: 0x66875Pm6q0dCwvzPHp
