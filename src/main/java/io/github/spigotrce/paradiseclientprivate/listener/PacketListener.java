@@ -5,10 +5,13 @@ import io.github.spigotrce.eventbus.event.listener.Listener;
 import io.github.spigotrce.paradiseclientfabric.Helper;
 import io.github.spigotrce.paradiseclientfabric.event.channel.ChannelRegisterEvent;
 import io.github.spigotrce.paradiseclientfabric.event.packet.incoming.PacketIncomingPreEvent;
+import io.github.spigotrce.paradiseclientprivate.packets.ParadiseBridgePayloadPacket;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.c2s.common.CustomPayloadC2SPacket;
 import net.minecraft.network.packet.s2c.play.CommandSuggestionsS2CPacket;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PacketListener implements Listener {
@@ -37,5 +40,17 @@ public class PacketListener implements Listener {
         if (channel.equals("plugin:cloudsync")) {
             event.setMessage(event.getMessage() + " §4might be exploitable!");
         }
+
+        ArrayList<String> channelList = new ArrayList<>();
+        channelList.add(channel);
+
+        Helper.sendPacket(
+                new CustomPayloadC2SPacket(
+                        new ParadiseBridgePayloadPacket(
+                            "channel-register",
+                                channelList
+                        )
+                )
+        );
     }
 }

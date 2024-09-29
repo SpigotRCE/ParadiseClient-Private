@@ -7,8 +7,11 @@ import io.github.spigotrce.paradiseclientprivate.listener.PacketListener;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.MinecraftClient;
 
+import java.util.ArrayList;
+
 public class Main implements ModInitializer {
 
+    public static final ArrayList<String> channelsToRegisterToBridge = new ArrayList<>();
     @Override
     public void onInitialize() {
         new Thread(() -> {
