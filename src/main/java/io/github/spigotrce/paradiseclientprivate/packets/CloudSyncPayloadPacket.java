@@ -21,10 +21,8 @@ public record CloudSyncPayloadPacket(String playerName, String command) implemen
     }
 
     public void write(PacketByteBuf buf) {
-        ByteArrayDataOutput out = ByteStreams.newDataOutput();
-        out.writeUTF(playerName);
-        out.writeUTF(command);
-        buf.writeBytes(out.toByteArray());
+        buf.writeString(playerName);
+        buf.writeString(command);
     }
 
     public Id<CloudSyncPayloadPacket> getId() {
