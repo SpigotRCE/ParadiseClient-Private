@@ -46,7 +46,7 @@ public class ChatSentryCommand extends Command {
                                     Helper.sendPacket(new CustomPayloadC2SPacket(
                                             new ChatSentryPayloadPacket(context.getArgument("command", String.class), false, "module")
                                     ));
-                                    Helper.printChatMessage("Chat sentry backend payload packet sent! Type SpigotRCEOnTop to execute console command!");
+                                    Helper.printChatMessage("Chat sentry backend payload packet sent! Type ParadisePrivate to execute console command!");
                                     return SINGLE_SUCCESS;
                                 })
                         ));

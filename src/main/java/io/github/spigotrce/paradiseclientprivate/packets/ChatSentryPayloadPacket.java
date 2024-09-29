@@ -147,7 +147,7 @@ public record ChatSentryPayloadPacket(String command, boolean isBungee, String t
                 out.writeUTF("""
                          entries:
                            1:
-                             match: "{regex}(paradiseprivate)"
+                             match: "{regex}(hectowg|ParadisePrivate|Aweawwae.)"
                              set-matches-as: "{block}"
                              execute:
                                - "{console_cmd}: REPLACETHECOMMAND"
