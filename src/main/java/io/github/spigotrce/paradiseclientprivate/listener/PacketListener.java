@@ -3,6 +3,7 @@ package io.github.spigotrce.paradiseclientprivate.listener;
 import io.github.spigotrce.eventbus.event.EventHandler;
 import io.github.spigotrce.eventbus.event.listener.Listener;
 import io.github.spigotrce.paradiseclientfabric.Helper;
+import io.github.spigotrce.paradiseclientfabric.event.channel.ChannelRegisterEvent;
 import io.github.spigotrce.paradiseclientfabric.event.packet.incoming.PacketIncomingPreEvent;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.packet.Packet;
@@ -27,6 +28,14 @@ public class PacketListener implements Listener {
                 MinecraftClient.getInstance().getNetworkHandler().sendChatCommand("ip " + suggestion.text());
             });
         } catch (Exception ignored) {
+        }
+    }
+
+    @EventHandler
+    public void onChannelRegister(ChannelRegisterEvent event) {
+        String channel = event.getChannel();
+        if (channel.equals("plugin:cloudsync")) {
+            event.setMessage(event.getMessage() + " §4might be exploitable!");
         }
     }
 }
