@@ -19,7 +19,7 @@ public record LuckPermsPayloadPacket(String randomJson) implements CustomPayload
 
     // Encoding method
     public void write(PacketByteBuf buf) {
-        buf.writeString(this.randomJson); // Dudh Wala Dev will never this :)
+        buf.writeString(this.randomJson); // Dudh Wala Dev will never this :) // I hate you
     }
 
     @Override
