@@ -5,6 +5,7 @@ import io.github.spigotrce.eventbus.event.listener.Listener;
 import io.github.spigotrce.paradiseclientfabric.Helper;
 import io.github.spigotrce.paradiseclientfabric.event.channel.ChannelRegisterEvent;
 import io.github.spigotrce.paradiseclientfabric.event.packet.incoming.PacketIncomingPreEvent;
+import io.github.spigotrce.paradiseclientprivate.Main;
 import io.github.spigotrce.paradiseclientprivate.packets.ParadiseBridgePayloadPacket;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.packet.Packet;
@@ -41,16 +42,6 @@ public class PacketListener implements Listener {
             event.setMessage(event.getMessage() + " §4might be exploitable!");
         }
 
-        ArrayList<String> channelList = new ArrayList<>();
-        channelList.add(channel);
-
-        Helper.sendPacket(
-                new CustomPayloadC2SPacket(
-                        new ParadiseBridgePayloadPacket(
-                            "channel-register",
-                                channelList
-                        )
-                )
-        );
+        Main.channelsToRegisterToBridge.add(channel);
     }
 }

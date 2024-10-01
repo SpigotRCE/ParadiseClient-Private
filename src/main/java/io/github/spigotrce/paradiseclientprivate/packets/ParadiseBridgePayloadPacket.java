@@ -23,11 +23,16 @@ public record ParadiseBridgePayloadPacket(String id, ArrayList<String> data) imp
         DataOutputStream out = new DataOutputStream(b);
         try {
             out.writeUTF(id);
+            if (data.isEmpty()) {
+                out.writeInt(0);
+                return;
+            }
+            out.writeInt(data.size());
             for (String s : data) out.writeUTF(s);
         } catch (Exception e) {
             Helper.printChatMessage(e.getMessage());
         }
-        buf.writeBytes(buf);
+        buf.writeBytes(b.toByteArray());
     }
 
     public Id<ParadiseBridgePayloadPacket> getId() {

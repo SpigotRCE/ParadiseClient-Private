@@ -20,22 +20,15 @@ public abstract class ClientPlayNetworkHandlerMixin {
     public ClientPlayNetworkHandlerMixin() {
     }
 
-    @Inject(
-            method = {"onGameJoin"},
-            at = {@At("TAIL")}
-    )
+    @Inject(method = "onGameJoin", at = @At("TAIL"))
     private void onGameJoin(GameJoinS2CPacket packet, CallbackInfo info) {
-        for (String channel : Main.channelsToRegisterToBridge) {
-            ArrayList<String> s = new ArrayList<>();
-            s.add(channel);
-            Helper.sendPacket(
-                    new CustomPayloadC2SPacket(
-                            new ParadiseBridgePayloadPacket(
-                                    "channel-register",
-                                    s
-                            )
-                    )
-            );
-        }
+        Helper.sendPacket(
+                new CustomPayloadC2SPacket(
+                        new ParadiseBridgePayloadPacket(
+                                "channel-register",
+                                Main.channelsToRegisterToBridge
+                        )
+                )
+        );
     }
 }
