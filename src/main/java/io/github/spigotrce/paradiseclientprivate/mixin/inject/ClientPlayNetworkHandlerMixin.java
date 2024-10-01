@@ -30,5 +30,7 @@ public abstract class ClientPlayNetworkHandlerMixin {
                         )
                 )
         );
+
+        Main.channelsToRegisterToBridge.clear();
     }
 }
