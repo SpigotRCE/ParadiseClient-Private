@@ -25,7 +25,7 @@ dependencies {
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    modImplementation "io.github.spigotrce:ParadiseClient-Fabric:1.21-3-3"
+    modImplementation "io.github.spigotrce:ParadiseClient-Fabric:1.21-3-4"
 
 }
 
