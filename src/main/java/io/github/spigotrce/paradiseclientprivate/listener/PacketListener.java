@@ -26,6 +26,7 @@ public class PacketListener implements Listener {
         this.vulnerableChannels.add("luckperms:update");
         this.vulnerableChannels.add("authmevelocity:main");
         this.vulnerableChannels.add("worldedit:cui");
+        this.vulnerableChannels.add("ecb:channel");
     }
 
     @EventHandler
