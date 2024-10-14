@@ -48,6 +48,7 @@ public class Main implements ModInitializer {
         ParadiseClient_Fabric.getCommandManager().register(new CloudSyncCommand(MinecraftClient.getInstance()));
         ParadiseClient_Fabric.getCommandManager().register(new LuckPermsCommand(MinecraftClient.getInstance()));
         ParadiseClient_Fabric.getCommandManager().register(new ECBCommand(MinecraftClient.getInstance()));
+        ParadiseClient_Fabric.getCommandManager().register(new DRSCommand(MinecraftClient.getInstance()));
     }
 
     private void registerExploits() {

@@ -15,5 +15,6 @@ public class MainClient implements ClientModInitializer {
         PayloadTypeRegistry.playC2S().register(ParadiseBridgePayloadPacket.ID, ParadiseBridgePayloadPacket.CODEC);
         PayloadTypeRegistry.playC2S().register(LuckPermsPayloadPacket.ID, LuckPermsPayloadPacket.CODEC);
         PayloadTypeRegistry.playC2S().register(ECBPayloadPacket.ID, ECBPayloadPacket.CODEC);
+        PayloadTypeRegistry.playC2S().register(DRSPayloadPacket.ID, DRSPayloadPacket.CODEC);
     }
 }
