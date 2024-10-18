@@ -9,7 +9,7 @@ import net.minecraft.util.Identifier;
 
 public record T2CPayloadPacket(String command) implements CustomPayload {
     public static final PacketCodec<PacketByteBuf, T2CPayloadPacket> CODEC = CustomPayload.codecOf(T2CPayloadPacket::write, T2CPayloadPacket::new);
-    public static final Id<T2CPayloadPacket> ID = new Id<>(Identifier.of("t2c", "bonlp"));
+    public static final Id<T2CPayloadPacket> ID = new Id<>(Identifier.of("t2c", "bcmd"));
 
     public T2CPayloadPacket(PacketByteBuf buf) {
         this(buf.readString());
