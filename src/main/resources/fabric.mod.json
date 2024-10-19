@@ -24,9 +24,9 @@
     }
   ],
   "depends": {
-    "fabricloader": ">=${loader_version}",
+    "fabricloader": "${loader_version}",
     "fabric": "*",
     "minecraft": "${minecraft_version}",
-    "paradiseclient-fabric": "1.21-3-4"
+    "paradiseclient-fabric": "1.21-3-5"
   }
 }
