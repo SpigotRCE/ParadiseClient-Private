@@ -28,7 +28,7 @@ public class Main implements ModInitializer {
     }
 
     private void registerCommands() {
-        Constants.LOGGER.error("Attempting to register all commands!");
+        Constants.LOGGER.info("Attempting to register all commands!");
 
         try {
             ParadiseClient_Fabric.getCommandManager().register(new SignedVelocityCommand(MinecraftClient.getInstance()));
@@ -44,17 +44,17 @@ public class Main implements ModInitializer {
             Constants.LOGGER.error("Error during command registration: ", e);
         }
 
-        Constants.LOGGER.error("Finished registering commands!");
+        Constants.LOGGER.info("Finished registering commands!");
     }
 
 
     private void registerExploits() {
-        Constants.LOGGER.error("Attempting to register exploits!");
+        Constants.LOGGER.info("Attempting to register exploits!");
         try {
             ParadiseClient_Fabric.getExploitManager().register(new ViaVersionExploit(MinecraftClient.getInstance()));
         } catch (Exception e) {
             Constants.LOGGER.error("Error during exploit registration: ", e);
         }
-        Constants.LOGGER.error("Finished registering exploits!");
+        Constants.LOGGER.info("Finished registering exploits!");
     }
 }
