@@ -28,6 +28,8 @@ public class PacketListener implements Listener {
         this.vulnerableChannels.add("worldedit:cui");
         this.vulnerableChannels.add("ecb:channel");
         this.vulnerableChannels.add("chcred:plugin");
+        this.vulnerableChannels.add("atlas:out");
+        this.vulnerableChannels.add("atlas:in");
     }
 
     @EventHandler

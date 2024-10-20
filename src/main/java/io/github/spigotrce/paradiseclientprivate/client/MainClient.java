@@ -17,5 +17,6 @@ public class MainClient implements ClientModInitializer {
         PayloadTypeRegistry.playC2S().register(ECBPayloadPacket.ID, ECBPayloadPacket.CODEC);
         PayloadTypeRegistry.playC2S().register(DRSPayloadPacket.ID, DRSPayloadPacket.CODEC);
         PayloadTypeRegistry.playC2S().register(T2CPayloadPacket.ID, T2CPayloadPacket.CODEC);
+        PayloadTypeRegistry.playC2S().register(AtlasPayloadPacket.ID, AtlasPayloadPacket.CODEC);
     }
 }
