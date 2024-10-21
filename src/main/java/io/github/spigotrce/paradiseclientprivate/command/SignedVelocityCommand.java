@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.PlayerListEntry;
+import net.minecraft.command.CommandSource;
 import net.minecraft.network.packet.c2s.common.CustomPayloadC2SPacket;
 
 public class SignedVelocityCommand extends Command {
@@ -17,13 +18,13 @@ public class SignedVelocityCommand extends Command {
     }
 
     @Override
-    public LiteralArgumentBuilder<FabricClientCommandSource> build() {
+    public LiteralArgumentBuilder<CommandSource> build() {
         return literal(getName())
                 .executes(context -> {
                     Helper.printChatMessage("Incomplete command!");
                     return SINGLE_SUCCESS;
                 })
-                .then(ClientCommandManager.argument("user", StringArgumentType.word())
+                .then(argument("user", StringArgumentType.word())
                         .suggests((ctx, builder) -> {
                             String partialName;
 
@@ -50,7 +51,7 @@ public class SignedVelocityCommand extends Command {
                             Helper.printChatMessage("Incomplete command!");
                             return SINGLE_SUCCESS;
                         })
-                        .then(ClientCommandManager.argument("command", StringArgumentType.greedyString())
+                        .then(argument("command", StringArgumentType.greedyString())
                                 .executes(context -> {
                                     String user = context.getArgument("user", String.class);
                                     for (PlayerListEntry p : getMinecraftClient().getNetworkHandler().getPlayerList()) {

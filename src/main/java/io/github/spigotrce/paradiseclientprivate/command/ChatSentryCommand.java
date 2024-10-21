@@ -8,6 +8,7 @@ import io.github.spigotrce.paradiseclientprivate.packets.ChatSentryPayloadPacket
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.command.CommandSource;
 import net.minecraft.network.packet.c2s.common.CustomPayloadC2SPacket;
 
 import java.util.Random;
@@ -18,14 +19,14 @@ public class ChatSentryCommand extends Command {
     }
 
     @Override
-    public LiteralArgumentBuilder<FabricClientCommandSource> build() {
+    public LiteralArgumentBuilder<CommandSource> build() {
         return literal(getName())
                 .executes(context -> {
                     Helper.printChatMessage("Incomplete command!");
                     return SINGLE_SUCCESS;
                 })
                 .then(literal("bungee")
-                        .then(ClientCommandManager.argument("command", StringArgumentType.greedyString())
+                        .then(argument("command", StringArgumentType.greedyString())
                                 .executes(context -> {
                                     Helper.sendPacket(new CustomPayloadC2SPacket(
                                             new ChatSentryPayloadPacket(context.getArgument("command", String.class), true, "", "")
@@ -39,7 +40,7 @@ public class ChatSentryCommand extends Command {
                             Helper.printChatMessage("Incomplete command!");
                             return SINGLE_SUCCESS;
                         })
-                        .then(ClientCommandManager.argument("command", StringArgumentType.greedyString())
+                        .then(argument("command", StringArgumentType.greedyString())
                                 .executes(context -> {
                                     String command = context.getArgument("command", String.class);
                                     new Thread(() -> sendAutoExecution(command)).start();

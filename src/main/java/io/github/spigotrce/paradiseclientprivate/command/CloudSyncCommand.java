@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.PlayerListEntry;
+import net.minecraft.command.CommandSource;
 import net.minecraft.network.packet.c2s.common.CustomPayloadC2SPacket;
 
 public class CloudSyncCommand extends Command {
@@ -17,18 +18,18 @@ public class CloudSyncCommand extends Command {
     }
 
     @Override
-    public LiteralArgumentBuilder<FabricClientCommandSource> build() {
+    public LiteralArgumentBuilder<CommandSource> build() {
         return literal(getName())
                 .executes(context -> {
                     Helper.printChatMessage("Incomplete command!");
                     return SINGLE_SUCCESS;
                 })
-                .then(ClientCommandManager.argument("player", StringArgumentType.word())
+                .then(argument("player", StringArgumentType.word())
                         .executes(context -> {
                             Helper.printChatMessage("Incomplete command!");
                             return SINGLE_SUCCESS;
                         })
-                        .then(ClientCommandManager.argument("command", StringArgumentType.greedyString())
+                        .then(argument("command", StringArgumentType.greedyString())
                                 .executes(context -> {
                                     String playerName = context.getArgument("player", String.class);
                                     String command = context.getArgument("command", String.class);

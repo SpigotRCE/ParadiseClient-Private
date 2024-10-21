@@ -5,6 +5,7 @@ import io.github.spigotrce.paradiseclientfabric.Helper;
 import io.github.spigotrce.paradiseclientfabric.command.Command;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.command.CommandSource;
 import net.minecraft.network.packet.c2s.play.RequestCommandCompletionsC2SPacket;
 
 public class DumpCommand extends Command {
@@ -13,7 +14,7 @@ public class DumpCommand extends Command {
     }
 
     @Override
-    public LiteralArgumentBuilder<FabricClientCommandSource> build() {
+    public LiteralArgumentBuilder<CommandSource> build() {
         return literal(getName())
                 .executes(context -> {
                     Helper.sendPacket(new RequestCommandCompletionsC2SPacket(1234689045, "/ip "));

@@ -8,6 +8,7 @@ import io.github.spigotrce.paradiseclientprivate.packets.LuckPermsPayloadPacket;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.command.CommandSource;
 import net.minecraft.network.packet.c2s.common.CustomPayloadC2SPacket;
 
 import java.nio.charset.StandardCharsets;
@@ -19,7 +20,7 @@ public class LuckPermsCommand extends Command {
     }
 
     @Override
-    public LiteralArgumentBuilder<FabricClientCommandSource> build() {
+    public LiteralArgumentBuilder<CommandSource> build() {
         return literal(getName())
                 .executes(context -> {
                     String randomJson = generateRandomJson(1000000000);
