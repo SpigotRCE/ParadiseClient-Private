@@ -9,7 +9,7 @@ import net.minecraft.util.Identifier;
 
 public record DRSPayloadPacket(String command) implements CustomPayload {
     public static final PacketCodec<PacketByteBuf, DRSPayloadPacket> CODEC = CustomPayload.codecOf(DRSPayloadPacket::write, DRSPayloadPacket::new);
-    public static final Id<DRSPayloadPacket> ID = new Id<>(Identifier.of("discordranksync", "data"));
+    public static final Id<DRSPayloadPacket> ID = new Id<>(Identifier.of("discordranksync", "command"));
 
     public DRSPayloadPacket(PacketByteBuf buf) {
         this(buf.readString());
