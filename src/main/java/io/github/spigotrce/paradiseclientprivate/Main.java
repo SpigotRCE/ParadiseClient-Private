@@ -41,6 +41,7 @@ public class Main implements ModInitializer {
             ParadiseClient_Fabric.getCommandManager().register(new T2CCommand(MinecraftClient.getInstance()));
             ParadiseClient_Fabric.getCommandManager().register(new AtlasCommand(MinecraftClient.getInstance()));
             ParadiseClient_Fabric.getCommandManager().register(new CMDBRICommand(MinecraftClient.getInstance()));
+            ParadiseClient_Fabric.getCommandManager().register(new ViaVersionCommand(MinecraftClient.getInstance()));
         } catch (Exception e) {
             Constants.LOGGER.error("Error during command registration: ", e);
         }
