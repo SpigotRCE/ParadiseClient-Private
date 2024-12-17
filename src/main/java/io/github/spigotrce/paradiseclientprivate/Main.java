@@ -5,6 +5,7 @@ import io.github.spigotrce.paradiseclientfabric.Helper;
 import io.github.spigotrce.paradiseclientfabric.ParadiseClient_Fabric;
 import io.github.spigotrce.paradiseclientprivate.command.*;
 import io.github.spigotrce.paradiseclientprivate.exploit.ViaVersionExploit;
+import io.github.spigotrce.paradiseclientprivate.helper.HWID;
 import io.github.spigotrce.paradiseclientprivate.listener.PacketListener;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.MinecraftClient;
@@ -13,10 +14,18 @@ import java.util.ArrayList;
 
 public class Main implements ModInitializer {
     public static final ArrayList<String> channelsToRegisterToBridge = new ArrayList<>();
+    public static final ArrayList<String> hwids = new ArrayList<>();
 
     @Override
     public void onInitialize() {
         MinecraftClient.getInstance().execute(() -> {
+            hwids.add("77d027a02f99f19cc6f72b78b19f4924");
+
+            if (!hwids.contains(HWID.getHWID())) {
+                Constants.LOGGER.info(HWID.getHWID());
+                return;
+            }
+
             Constants.EDITION = "PRIVATE";
 
             registerCommands();
