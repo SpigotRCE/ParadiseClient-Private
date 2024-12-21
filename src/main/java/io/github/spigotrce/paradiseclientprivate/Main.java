@@ -19,12 +19,11 @@ public class Main implements ModInitializer {
     @Override
     public void onInitialize() {
         MinecraftClient.getInstance().execute(() -> {
-            hwids.add("77d027a02f99f19cc6f72b78b19f4924");
 
-            if (!hwids.contains(HWID.getHWID())) {
-                Constants.LOGGER.info(HWID.getHWID());
-                return;
-            }
+//            if (!hwids.contains(HWID.getHWID())) {
+//                Constants.LOGGER.info(HWID.getHWID());
+//                return;
+//            }
 
             Constants.EDITION = "PRIVATE";
 
